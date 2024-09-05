@@ -40,5 +40,6 @@ export class FormComponent  {
     }else {
       alert('invalid data')
     }
+    this.myForm.reset();
    }
 }

@@ -28,7 +28,7 @@
   <div class="input-group">
     <label for="password-two">Confirm Password</label>
     <input type="password" id="password-two" formControlName="password-two" />
-    @if(!myForm.get('password-two')?.errors?.['passwordMismatch'] && myForm.get('password-two')?.touched) {     
+    @if(myForm.get('password-two')?.errors?.['passwordMismatch'] && myForm.get('password-two')?.touched) {     
       <div>
         <span style="color: red">Password confirm doesn't match</span>
       </div>
