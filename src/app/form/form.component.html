@@ -1,0 +1,38 @@
+<form class="form" [formGroup]="myForm">
+  <div class="input-group">
+    <label for="login">Login</label>
+    <input type="text" id="login" formControlName="login" />
+    @if(!myForm.controls.login.valid && myForm.controls.login.touched) {
+      <div class="error-message">Required</div>
+    }
+  </div>
+  <div class="input-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" />
+    @if(!myForm.controls.email.valid && myForm.controls.email.touched) {
+      <div class="error-message">Required</div>
+    }
+  </div>
+  <div class="input-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" (input)="onPasswordInput($event)"/>
+    @if(!myForm.controls.password.valid && myForm.controls.password.touched) {
+      <div class="error-message">Required</div>
+    }
+  </div>
+  <div class="strength-indicators">
+    <div [ngClass]="{ 'weak': strength === 'easy', 'too-short': strength === 'too-short', 'medium': strength === 'medium', 'strong': strength === 'strong' }"></div>
+    <div [ngClass]="{ 'medium': strength === 'medium', 'too-short': strength === 'too-short', 'strong': strength === 'strong' }"></div>
+    <div [ngClass]="{ 'strong': strength === 'strong', 'too-short': strength === 'too-short' }"></div>
+  </div>
+  <div class="input-group">
+    <label for="password-two">Confirm Password</label>
+    <input type="password" id="password-two" formControlName="password-two" />
+    @if(!myForm.get('password-two')?.errors?.['passwordMismatch'] && myForm.get('password-two')?.touched) {     
+      <div>
+        <span style="color: red">Password confirm doesn't match</span>
+      </div>
+    }
+  </div>
+  <button (click)="handleSubmit()" [disabled]="!myForm.valid" >Log in</button>
+</form>
